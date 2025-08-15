@@ -13,5 +13,7 @@
       "email": "zhaiyuxin103@hotmail.com"
     }
   ],
-  "require": {}
+  "require": {
+    "guzzlehttp/guzzle": "^7.9"
+  }
 }
