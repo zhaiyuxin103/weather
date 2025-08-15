@@ -4,7 +4,8 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Yuxin\\Weather\\": "src/"
+      "Yuxin\\Weather\\": "src/",
+      "Tests\\": "tests/"
     }
   },
   "authors": [
@@ -15,5 +16,13 @@
   ],
   "require": {
     "guzzlehttp/guzzle": "^7.9"
+  },
+  "require-dev": {
+    "pestphp/pest": "^3.8"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
   }
 }
