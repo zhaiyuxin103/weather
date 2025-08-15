@@ -1,0 +1,17 @@
+{
+  "name": "zhaiyuxin/weather",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Yuxin\\Weather\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "YuXin Zhai",
+      "email": "zhaiyuxin103@hotmail.com"
+    }
+  ],
+  "require": {}
+}
