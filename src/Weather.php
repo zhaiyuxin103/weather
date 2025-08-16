@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yuxin\Weather;
 
 use Exception;
@@ -11,7 +13,9 @@ use Yuxin\Weather\Exceptions\InvalidArgumentException;
 class Weather
 {
     protected string $key;
+
     protected array $guzzleOptions = [];
+
     public function __construct(string $key)
     {
         $this->key = $key;
@@ -37,25 +41,25 @@ class Weather
         $url = 'https://restapi.amap.com/v3/weather/weatherInfo';
 
         $types = [
-            'live' => 'base',
-            'forecast' => 'all'
+            'live'     => 'base',
+            'forecast' => 'all',
         ];
 
         // 对 `$format` 进行检查，如果不是 `xml` 或 `json` 则抛出异常
-        if (!in_array(strtolower($format), ['xml', 'json'])) {
+        if (! in_array(strtolower($format), ['xml', 'json'])) {
             throw new InvalidArgumentException('Invalid response format: ' . $format);
         }
 
         // 对 `$type` 进行检查，如果不是 `base` 或 `all` 则抛出异常
-        if (!array_key_exists(strtolower($type), $types)) {
+        if (! array_key_exists(strtolower($type), $types)) {
             throw new InvalidArgumentException('Invalid type value(live/forecast): ' . $type);
         }
 
         // 构建查询参数
         $query = array_filter([
-            'key' => $this->key,
-            'city' => $city,
-            'output' => $format,
+            'key'        => $this->key,
+            'city'       => $city,
+            'output'     => $format,
             'extensions' => $types[$type],
         ]);
 
@@ -66,7 +70,7 @@ class Weather
             ])->getBody()->getContents();
 
             // 根据 `$format` 返回 JSON 或 XML 数据
-            return 'json' === $format ? json_decode($response, true) : $response;
+            return $format === 'json' ? json_decode($response, true) : $response;
         } catch (Exception $e) {
             // 捕获异常并抛出 HttpException
             throw new HttpException($e->getMessage(), $e->getCode(), $e);

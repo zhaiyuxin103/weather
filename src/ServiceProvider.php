@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yuxin\Weather;
 
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
 {
@@ -33,7 +35,7 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
 
     /**
      * Get the services provided by the provider.
-     * 
+     *
      * @return array<int, string>
      */
     public function provides(): array

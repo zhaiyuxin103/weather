@@ -1,9 +1,10 @@
 <?php
 
-namespace Yuxin\Weather\Exceptions;
+declare(strict_types=1);
 
-use Yuxin\Weather\Exceptions\Exception;
+namespace Yuxin\Weather\Exceptions;
 
 class InvalidArgumentException extends Exception
 {
+    //
 }

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use GuzzleHttp\Client;
-use Yuxin\Weather\Weather;
-use Mockery\Matcher\AnyArgs;
 use GuzzleHttp\Psr7\Response;
+use Mockery\Matcher\AnyArgs;
 use Yuxin\Weather\Exceptions\InvalidArgumentException;
+use Yuxin\Weather\Weather;
 
 describe('Weather', function () {
     test('get http client', function () {
@@ -56,9 +58,9 @@ describe('Get Weather', function () {
             // 指定将会产生的行为（在后续的测试中将会按下面的参数来调用）
             $client->allows()->get('https://restapi.amap.com/v3/weather/weatherInfo', [
                 'query' => [
-                    'key' => 'mock-key',
-                    'city' => '北京',
-                    'output' => 'json',
+                    'key'        => 'mock-key',
+                    'city'       => '北京',
+                    'output'     => 'json',
                     'extensions' => 'base',
                 ],
             ])->andReturn($response);
@@ -79,9 +81,9 @@ describe('Get Weather', function () {
 
             $client->allows()->get('https://restapi.amap.com/v3/weather/weatherInfo', [
                 'query' => [
-                    'key' => 'mock-key',
-                    'city' => '北京',
-                    'output' => 'xml',
+                    'key'        => 'mock-key',
+                    'city'       => '北京',
+                    'output'     => 'xml',
                     'extensions' => 'all',
                 ],
             ])->andReturn($response);
@@ -98,7 +100,7 @@ describe('Get Weather', function () {
             // 接着需要断言调用时会产生异常
             expect(function () {
                 $client = Mockery::mock(Client::class);
-                $client->allows()->get(new AnyArgs())->andThrow(new Exception('request timeout'));
+                $client->allows()->get(new AnyArgs)->andThrow(new Exception('request timeout'));
 
                 $weather = Mockery::mock(Weather::class, ['mock-key'])->makePartial();
                 $weather->allows()->getHttpClient()->andReturn($client);
