@@ -76,10 +76,10 @@ $weather = new Weather('your_api_key');
 $response = $weather->getWeather('北京');
 
 // 获取详细天气信息
-$response = $weather->getWeather('北京', 'all');
+$response = $weather->getWeather('北京', 'forecast');
 
 // 获取 XML 格式响应
-$response = $weather->getWeather('北京', 'base', 'xml');
+$response = $weather->getWeather('北京', 'live', 'xml');
 ```
 
 #### 2. Laravel 中使用
@@ -121,7 +121,7 @@ $weather = Weather::getWeather('广州');
 | 参数 | 类型 | 必填 | 默认值 | 说明 |
 |------|------|------|--------|------|
 | `$city` | string | 是 | - | 城市名称或编码 |
-| `$type` | string | 否 | base | 天气类型：base（实况天气） 或 all（预报天气） |
+| `$type` | string | 否 | live | 天气类型：live（实况天气） 或 forecast（预报天气） |
 | `$format` | string | 否 | json | 响应格式：json 或 xml |
 
 ### 响应格式

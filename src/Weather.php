@@ -32,9 +32,14 @@ class Weather
      * @throws GuzzleException
      * @throws HttpException
      */
-    public function getWeather($city, string $type = 'base', string $format = 'json')
+    public function getWeather($city, string $type = 'live', string $format = 'json')
     {
         $url = 'https://restapi.amap.com/v3/weather/weatherInfo';
+
+        $types = [
+            'live' => 'base',
+            'forecast' => 'all'
+        ];
 
         // 对 `$format` 进行检查，如果不是 `xml` 或 `json` 则抛出异常
         if (!in_array(strtolower($format), ['xml', 'json'])) {
@@ -42,8 +47,8 @@ class Weather
         }
 
         // 对 `$type` 进行检查，如果不是 `base` 或 `all` 则抛出异常
-        if (!in_array(strtolower($type), ['base', 'all'])) {
-            throw new InvalidArgumentException('Invalid type value(base/all): ' . $type);
+        if (!array_key_exists(strtolower($type), $types)) {
+            throw new InvalidArgumentException('Invalid type value(live/forecast): ' . $type);
         }
 
         // 构建查询参数
@@ -51,7 +56,7 @@ class Weather
             'key' => $this->key,
             'city' => $city,
             'output' => $format,
-            'extensions' => $type,
+            'extensions' => $types[$type],
         ]);
 
         try {
@@ -66,5 +71,15 @@ class Weather
             // 捕获异常并抛出 HttpException
             throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    public function getLiveWeather($city, string $format = 'json')
+    {
+        return $this->getWeather($city, 'live', $format);
+    }
+
+    public function getForecastsWeather($city, string $format = 'json')
+    {
+        return $this->getWeather($city, 'forecast', $format);
     }
 }

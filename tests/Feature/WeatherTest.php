@@ -33,7 +33,7 @@ describe('Get Weather', function () {
             expect(function () {
                 $weather = new Weather('mock-key');
                 $weather->getWeather('北京', 'foo');
-            })->toThrow(InvalidArgumentException::class, 'Invalid type value(base/all): foo');
+            })->toThrow(InvalidArgumentException::class, 'Invalid type value(live/forecast): foo');
         });
 
         // 测试 $format 参数
@@ -89,7 +89,7 @@ describe('Get Weather', function () {
             $weather = Mockery::mock(Weather::class, ['mock-key'])->makePartial();
             $weather->allows()->getHttpClient()->andReturn($client);
 
-            expect($weather->getWeather('北京', 'all', 'xml'))->toBe('<hello>world</hello>');
+            expect($weather->getWeather('北京', 'forecast', 'xml'))->toBe('<hello>world</hello>');
         });
     });
 
@@ -106,5 +106,20 @@ describe('Get Weather', function () {
                 $weather->getWeather('北京');
             })->toThrow(Exception::class, 'request timeout');
         });
+    });
+
+    test('get live weather', function () {
+        // 将 getWeather 接口模拟为返回固定内容，以测试参数传递是否正确
+        $weather = Mockery::mock(Weather::class, ['mock-key'])->makePartial();
+        $weather->expects()->getWeather('北京', 'live', 'json')->andReturn(['success' => true]);
+
+        expect($weather->getLiveWeather('北京'))->toBe(['success' => true]);
+    });
+
+    test('get forecasts weather', function () {
+        $weather = Mockery::mock(Weather::class, ['mock-key'])->makePartial();
+        $weather->expects()->getWeather('北京', 'forecast', 'json')->andReturn(['success' => true]);
+
+        expect($weather->getForecastsWeather('北京'))->toBe(['success' => true]);
     });
 });
