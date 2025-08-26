@@ -1,0 +1,21 @@
+{
+  "name": "weather",
+  "version": "1.0.0",
+  "description": "一个基于高德开放平台 API 的 PHP 天气信息组件，支持 Laravel 框架，提供简单易用的天气查询功能。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": [
+    {
+      "name": "YuXin Zhai",
+      "email": "zhaiyuxin103@hotmail.com"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
