@@ -3,12 +3,12 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/zhaiyuxin/weather?style=for-the-badge)](https://packagist.org/packages/zhaiyuxin/weather)
 [![Total Downloads on Packagist](https://img.shields.io/packagist/dt/zhaiyuxin/weather?style=for-the-badge)](https://packagist.org/packages/zhaiyuxin/weather)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/zhaiyuxin103/weather/tests.yml?style=for-the-badge
-)](https://github.com/zhaiyuxin103/weather/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/zhaiyuxin103/weather/tests.yml?style=for-the-badge)](https://github.com/zhaiyuxin103/weather/actions)
 [![Code Coverage](https://img.shields.io/codecov/c/github/zhaiyuxin103/weather?style=for-the-badge)](https://codecov.io/gh/zhaiyuxin103/weather)
 
 一个基于高德开放平台 API 的 PHP 天气信息组件，支持 Laravel 框架，提供简单易用的天气查询功能。
-****
+
+---
 
 ## ✨ 特性
 
@@ -97,7 +97,7 @@ class WeatherController extends Controller
     {
         // 获取北京天气
         $weather = $weather->getWeather('北京');
-        
+
         return view('weather.index', compact('weather'));
     }
 }
@@ -118,11 +118,11 @@ $weather = Weather::getWeather('广州');
 
 #### `getWeather($city, $type, $format)`
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| `$city` | string | 是 | - | 城市名称或编码 |
-| `$type` | string | 否 | live | 天气类型：live（实况天气） 或 forecast（预报天气） |
-| `$format` | string | 否 | json | 响应格式：json 或 xml |
+| 参数      | 类型   | 必填 | 默认值 | 说明                                               |
+| --------- | ------ | ---- | ------ | -------------------------------------------------- |
+| `$city`   | string | 是   | -      | 城市名称或编码                                     |
+| `$type`   | string | 否   | live   | 天气类型：live（实况天气） 或 forecast（预报天气） |
+| `$format` | string | 否   | json   | 响应格式：json 或 xml                              |
 
 ### 响应格式
 
@@ -130,32 +130,32 @@ $weather = Weather::getWeather('广州');
 
 ```json
 {
-    "status": "1",
-    "count": "1",
-    "info": "OK",
-    "infocode": "10000",
-    "forecasts": [
+  "status": "1",
+  "count": "1",
+  "info": "OK",
+  "infocode": "10000",
+  "forecasts": [
+    {
+      "city": "北京",
+      "adcode": "110100",
+      "province": "北京市",
+      "reporttime": "2025-01-20 10:00:00",
+      "casts": [
         {
-            "city": "北京",
-            "adcode": "110100",
-            "province": "北京市",
-            "reporttime": "2025-01-20 10:00:00",
-            "casts": [
-                {
-                    "date": "2025-01-20",
-                    "week": "1",
-                    "dayweather": "晴",
-                    "nightweather": "晴",
-                    "daytemp": "5",
-                    "nighttemp": "-5",
-                    "daywind": "北风",
-                    "nightwind": "北风",
-                    "daypower": "3",
-                    "nightpower": "3"
-                }
-            ]
+          "date": "2025-01-20",
+          "week": "1",
+          "dayweather": "晴",
+          "nightweather": "晴",
+          "daytemp": "5",
+          "nighttemp": "-5",
+          "daywind": "北风",
+          "nightwind": "北风",
+          "daypower": "3",
+          "nightpower": "3"
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 
