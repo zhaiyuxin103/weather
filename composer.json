@@ -20,7 +20,8 @@
   "require-dev": {
     "pestphp/pest": "^3.8",
     "mockery/mockery": "^1.6",
-    "laravel/pint": "^1.24"
+    "laravel/pint": "^1.24",
+    "orchestra/testbench": "^10.6"
   },
   "config": {
     "allow-plugins": {
@@ -33,5 +34,33 @@
         "Yuxin\\Weather\\ServiceProvider"
       ]
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Workbench\\App\\": "workbench/app/",
+      "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+      "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+    }
+  },
+  "scripts": {
+    "post-autoload-dump": [
+      "@clear",
+      "@prepare"
+    ],
+    "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+    "prepare": "@php vendor/bin/testbench package:discover --ansi",
+    "build": "@php vendor/bin/testbench workbench:build --ansi",
+    "serve": [
+      "Composer\\Config::disableProcessTimeout",
+      "@build",
+      "@php vendor/bin/testbench serve --ansi"
+    ],
+    "lint": [
+      "@php vendor/bin/pint --ansi"
+    ],
+    "test": [
+      "@clear",
+      "@php vendor/bin/pest"
+    ]
   }
 }
