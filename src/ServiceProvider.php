@@ -21,7 +21,20 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
      */
     public function boot()
     {
-        return [Weather::class, 'weather'];
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/services.php',
+            'services'
+        );
+
+        $this->publishes([
+            __DIR__ . '/../config/services.php' => config_path('services.php'),
+        ], 'weather-config');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                // Commands can be added here
+            ]);
+        }
     }
 
     public function register()
