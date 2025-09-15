@@ -33,7 +33,10 @@
     "laravel": {
       "providers": [
         "Yuxin\\Weather\\ServiceProvider"
-      ]
+      ],
+      "aliases": {
+        "Weather": "Yuxin\\Weather\\Facades\\Weather"
+      }
     }
   },
   "autoload-dev": {

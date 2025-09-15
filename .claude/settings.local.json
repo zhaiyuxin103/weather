@@ -4,7 +4,8 @@
       "Bash(find:*)",
       "Bash(./vendor/bin/pest:*)",
       "Bash(./vendor/bin/phpstan:*)",
-      "Bash(./vendor/bin/pint:*)"
+      "Bash(./vendor/bin/pint:*)",
+      "Bash(php artisan tinker:*)"
     ],
     "deny": [],
     "ask": []
