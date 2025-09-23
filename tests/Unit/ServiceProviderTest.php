@@ -12,23 +12,21 @@ describe('Service Provider', function (): void {
         $provider = new ServiceProvider($app);
 
         // Mock the config to avoid missing config dependency
-        $app->singleton('config', function () {
-            return new class
+        $app->singleton('config', fn () => new class
+        {
+            public function get($key, $default = null)
             {
-                public function get($key, $default = null)
-                {
-                    return $key === 'services.weather.key' ? 'test-key' : $default;
-                }
-            };
+                return $key === 'services.weather.key' ? 'test-key' : $default;
+            }
         });
 
         $provider->register();
 
         // Test that service is registered as singleton
-        $service1 = $app->make(Weather::class);
+        $weather  = $app->make(Weather::class);
         $service2 = $app->make(Weather::class);
 
-        expect($service1)->toBe($service2);
+        expect($weather)->toBe($service2);
     });
 
     test('registers weather alias', function (): void {
@@ -36,14 +34,12 @@ describe('Service Provider', function (): void {
         $provider = new ServiceProvider($app);
 
         // Mock the config to avoid missing config dependency
-        $app->singleton('config', function () {
-            return new class
+        $app->singleton('config', fn () => new class
+        {
+            public function get($key, $default = null)
             {
-                public function get($key, $default = null)
-                {
-                    return $key === 'services.weather.key' ? 'test-key' : $default;
-                }
-            };
+                return $key === 'services.weather.key' ? 'test-key' : $default;
+            }
         });
 
         $provider->register();
