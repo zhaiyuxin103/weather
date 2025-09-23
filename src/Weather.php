@@ -27,16 +27,11 @@ class Weather
         self::TYPE_FORECAST => 'all',
     ];
 
-    protected string $key;
-
     protected array $guzzleOptions = [];
 
     protected ?Client $httpClient = null;
 
-    public function __construct(string $key)
-    {
-        $this->key = $key;
-    }
+    public function __construct(protected string $key) {}
 
     public function getHttpClient(): Client
     {

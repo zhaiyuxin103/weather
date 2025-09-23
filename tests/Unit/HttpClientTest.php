@@ -5,8 +5,8 @@ declare(strict_types=1);
 use GuzzleHttp\Client;
 use Yuxin\Weather\Weather;
 
-describe('HTTP Client', function () {
-    test('uses singleton pattern', function () {
+describe('HTTP Client', function (): void {
+    test('uses singleton pattern', function (): void {
         $weather = new Weather('mock-key');
 
         $client1 = $weather->getHttpClient();
@@ -15,7 +15,7 @@ describe('HTTP Client', function () {
         expect($client1)->toBe($client2);
     });
 
-    test('can set guzzle options', function () {
+    test('can set guzzle options', function (): void {
         $weather = new Weather('mock-key');
 
         expect($weather->getHttpClient()->getConfig('timeout'))->toBeNull();
@@ -25,7 +25,7 @@ describe('HTTP Client', function () {
         expect($weather->getHttpClient()->getConfig('timeout'))->toBe(50000);
     });
 
-    test('creates new client when options change', function () {
+    test('creates new client when options change', function (): void {
         $weather = new Weather('mock-key');
 
         $client1 = $weather->getHttpClient();
@@ -37,7 +37,7 @@ describe('HTTP Client', function () {
         expect($client2->getConfig('timeout'))->toBe(30);
     });
 
-    test('client is instance of guzzle client', function () {
+    test('client is instance of guzzle client', function (): void {
         $weather = new Weather('mock-key');
 
         expect($weather->getHttpClient())->toBeInstanceOf(Client::class);

@@ -39,9 +39,7 @@ class ServiceProvider extends BaseServiceProvider implements DeferrableProvider
 
     public function register()
     {
-        $this->app->singleton(Weather::class, function () {
-            return new Weather(config('services.weather.key'));
-        });
+        $this->app->singleton(Weather::class, fn () => new Weather(config('services.weather.key')));
 
         $this->app->alias(Weather::class, 'weather');
     }
