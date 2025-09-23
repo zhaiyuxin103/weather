@@ -22,7 +22,8 @@
     "mockery/mockery": "^1.6",
     "laravel/pint": "^1.24",
     "orchestra/testbench": "^10.6",
-    "phpstan/phpstan": "^2.1"
+    "phpstan/phpstan": "^2.1",
+    "rector/rector": "^2.1"
   },
   "config": {
     "allow-plugins": {
@@ -65,6 +66,8 @@
     "test": [
       "@clear",
       "@php vendor/bin/pest"
-    ]
+    ],
+    "test:refactor": "rector --dry-run",
+    "refactor": "rector"
   }
 }
