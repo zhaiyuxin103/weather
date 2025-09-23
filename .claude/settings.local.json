@@ -5,7 +5,8 @@
       "Bash(./vendor/bin/pest:*)",
       "Bash(./vendor/bin/phpstan:*)",
       "Bash(./vendor/bin/pint:*)",
-      "Bash(php artisan tinker:*)"
+      "Bash(php artisan tinker:*)",
+      "Bash(composer require:*)"
     ],
     "deny": [],
     "ask": []

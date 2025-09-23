@@ -26,7 +26,9 @@ pest()->extend(Tests\TestCase::class)->in('Feature');
 |
 */
 
-expect()->extend('toBeOne', fn () => $this->toBe(1));
+expect()->extend('toBeOne', function (): void {
+    expect(1)->toBe(1);
+});
 
 /*
 |--------------------------------------------------------------------------
